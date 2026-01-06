@@ -37,8 +37,8 @@ def send_professional_email(subject, html_content):
 def create_html_body(new_items, reminders):
     """Creates a professional HTML email body."""
     
-    # 1. We use a placeholder {DATE_HERE} instead of .format() 
-    # This prevents Python from getting confused by the CSS curly braces
+    # We use a placeholder {DATE_HERE} instead of .format() 
+    # This prevents Python from crashing on the CSS curly braces
     html_template = """
     <html>
     <head>
@@ -57,13 +57,13 @@ def create_html_body(new_items, reminders):
     <body>
         <div class="container">
             <div class="header">
-                <h2>Daily Scholarship Report</h2>
+                <h2>🎓 Daily Scholarship Report</h2>
                 <p>{DATE_HERE}</p>
             </div>
             <div style="padding: 20px;">
     """
     
-    # 2. Safely inject the date
+    # Safely inject the date
     current_date = datetime.now().strftime("%B %d, %Y")
     html = html_template.replace("{DATE_HERE}", current_date)
 
