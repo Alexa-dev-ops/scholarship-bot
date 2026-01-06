@@ -2,8 +2,8 @@ name: Daily Scholarship Scan
 
 on:
   schedule:
-    # Runs at 08:00 UTC every day
-    - cron: "0 8 * * *"
+    # Runs at 10:00 UTC every day
+    - cron: "0 11 * * *"
   # Allows you to click "Run" manually for testing
   workflow_dispatch:
 
