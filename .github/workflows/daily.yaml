@@ -1,0 +1,44 @@
+name: Daily Scholarship Scan
+
+on:
+  schedule:
+    # Runs at 08:00 UTC every day
+    - cron: "0 8 * * *"
+  # Allows you to click "Run" manually for testing
+  workflow_dispatch:
+
+# FIX 1: Give the bot permission to write changes back to your repo
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          
+      - run: pip install -r requirements.txt
+      
+      - run: python run.py
+        env:
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+
+      # FIX 2: Commit the updated 'storage.json' so the bot remembers 
+      # what it found yesterday.
+      - name: Save memory (storage.json)
+        run: |
+          git config --global user.name "Scholarship Bot"
+          git config --global user.email "actions@github.com"
+          git add storage.json
+          # The "|| exit 0" prevents error if there are no new updates
+          git commit -m "Update scholarship database" || exit 0
+          git push
+        
+    
+# rwia srif wclb rulm
