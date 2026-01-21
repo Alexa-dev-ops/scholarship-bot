@@ -8,5 +8,10 @@
     "name": "WeMakeScholars (UK)",
     "deadline": "2026-12-31",
     "applied": false
+  },
+  "https://www.chevening.org/scholarship/nigeria/": {
+    "name": "Chevening Scholarship (Nigeria)",
+    "deadline": "2026-12-31",
+    "applied": false
   }
 }
